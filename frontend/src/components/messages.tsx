@@ -21,6 +21,9 @@ export function Messages() {
 		evtSource.addEventListener("message", (event: MessageEvent<string>) => {
 			const data = JSON.parse(event.data) as Message;
 			messages.value = [...messages.value, data];
+			if (messages.value.length > 100) {
+				messages.value = messages.value.slice(1);
+			}
 		});
 
 		return () => {
@@ -32,7 +35,7 @@ export function Messages() {
 		<div className="flex flex-col-reverse overflow-y-scroll rounded h-full w-full lg:w-[40%]">
 			<div className="flex flex-col space-y-3 py-4 lg:px-2">
 				{messages.value.map((message) => (
-					<ChatBubble {...message} />
+					<ChatBubble key={message.id} {...message} />
 				))}
 			</div>
 		</div>

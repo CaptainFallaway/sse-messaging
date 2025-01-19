@@ -7,6 +7,7 @@ import (
 )
 
 type Message struct {
+	Id      string `json:"id"`
 	Author  string `json:"author"`
 	Message string `json:"message"`
 }
@@ -30,6 +31,9 @@ func (ms *MessageService) AddMessage(m Message) {
 	defer ms.mux.Unlock()
 
 	ms.messages = append(ms.messages, m)
+	if len(ms.messages) > 100 {
+		ms.messages = ms.messages[1:]
+	}
 
 	for _, ch := range ms.subscribers {
 		ch <- m

@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/CaptainFallaway/sse-messaging/internal"
+	"github.com/google/uuid"
 
 	"github.com/charmbracelet/log"
 
@@ -66,6 +67,7 @@ func sendMessage(storage *internal.MessageService) http.HandlerFunc {
 			return
 		}
 
+		m.Id = uuid.New().String()
 		storage.AddMessage(m)
 
 		w.WriteHeader(http.StatusCreated)
