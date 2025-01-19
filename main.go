@@ -13,7 +13,7 @@ import (
 	"github.com/rs/cors"
 )
 
-const addr = "0.0.0.0:8000"
+const addr = "0.0.0.0:3000"
 
 //go:embed frontend/dist
 var webFs embed.FS
