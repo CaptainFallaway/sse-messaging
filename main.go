@@ -80,7 +80,7 @@ func subscribe(ms *internal.MessageService) http.HandlerFunc {
 
 		header := w.Header()
 		header.Set("Access-Control-Allow-Origin", "*")
-		header.Set("Content-Type", "text/event-stream")
+		header.Set("Content-Type", "text/event-stream; charset=UTF-8")
 		header.Set("Cache-Control", "no-cache")
 		header.Set("Connection", "keep-alive")
 
